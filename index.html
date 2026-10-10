@@ -1,115 +1,162 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cierre Docker</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <main>
-      <header>
-        <div>
-          <h1>Comparar Dockerfile</h1>
-          <p>Arrastrá cada característica al Dockerfile que corresponda.</p>
-        </div>
-        <div class="acciones">
-          <button id="comprobar">Comprobar</button>
-          <button id="reiniciar">Reiniciar</button>
-        </div>
-      </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cierre Docker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-      <section class="dockerfiles">
-        <article class="docker docker-1">
-          <div class="titulo">
-            <span>Imagen 1</span>
-            <small>info</small>
-          </div>
-          <pre><code>FROM ubuntu:24.04
+<body>
+  <main>
+
+    <header>
+      <div>
+        <p class="kicker">CIERRE</p>
+        <h1>Comparar Dockerfile</h1>
+        <p>Arrastrá cada característica al Dockerfile que corresponda.</p>
+      </div>
+
+      <div class="acciones">
+        <button id="comprobar">Comprobar</button>
+        <button id="reiniciar">Reiniciar</button>
+      </div>
+    </header>
+
+    <section class="dockerfiles">
+
+      <article class="docker docker-1">
+        <div class="titulo">
+          <span>Imagen 1</span>
+          <small>info</small>
+        </div>
+
+        <pre><code>FROM ubuntu:24.04
 
 RUN echo "Sistema preparado correctamente" &gt; /info.txt
 
 CMD ["cat", "/info.txt"]</code></pre>
-        </article>
+      </article>
 
-        <article class="docker docker-2">
-          <div class="titulo">
-            <span>Imagen 2</span>
-            <small>bash</small>
-          </div>
-          <pre><code>FROM ubuntu:24.04
+      <article class="docker docker-2">
+        <div class="titulo">
+          <span>Imagen 2</span>
+          <small>bash</small>
+        </div>
+
+        <pre><code>FROM ubuntu:24.04
 
 RUN echo "Sistema preparado correctamente" &gt; /info.txt
 
 CMD ["bash"]</code></pre>
-        </article>
-      </section>
+      </article>
 
-      <section class="zonas" id="zonas">
-        <div class="zona" data-zona="uno">
-          <h2>Imagen 1</h2>
-          <div class="drop"></div>
-        </div>
+    </section>
 
-        <div
-          class="zona zona-ambas"
-          id="zonaAmbas"
-          data-zona="ambas"
-          aria-hidden="true">
-          <h2>Ambas</h2>
-          <div class="drop"></div>
-        </div>
+    <section class="zonas" id="zonas">
 
-        <div class="zona" data-zona="dos">
-          <h2>Imagen 2</h2>
-          <div class="drop"></div>
-        </div>
-      </section>
+      <div class="zona" data-zona="uno">
+        <h2>Imagen 1</h2>
+        <div class="drop"></div>
+      </div>
 
-      <section class="tarjetas" id="tarjetas">
-        <div class="tarjeta" draggable="true" data-respuesta="uno">
-          Ejecuta <code>cat /info.txt</code> al iniciar.
-        </div>
+      <div
+        class="zona zona-ambas"
+        id="zonaAmbas"
+        data-zona="ambas"
+        aria-hidden="true"
+      >
+        <h2>Ambas</h2>
+        <div class="drop"></div>
+      </div>
 
-        <div class="tarjeta" draggable="true" data-respuesta="dos">
-          Inicia una terminal Bash.
-        </div>
+      <div class="zona" data-zona="dos">
+        <h2>Imagen 2</h2>
+        <div class="drop"></div>
+      </div>
 
-        <div class="tarjeta" draggable="true" data-respuesta="uno">
-          Finaliza luego de mostrar el contenido.
-        </div>
+    </section>
 
-        <div class="tarjeta" draggable="true" data-respuesta="dos">
-          Permanece activo mientras Bash sigue ejecutándose.
-        </div>
+    <section class="tarjetas" id="tarjetas">
 
-        <div class="tarjeta" draggable="true" data-respuesta="ambas">
-          Usa Ubuntu 24.04 como imagen base.
-        </div>
+      <div
+        class="tarjeta"
+        draggable="true"
+        data-respuesta="uno"
+      >
+        Ejecuta <code>cat /info.txt</code> al iniciar.
+      </div>
 
-        <div class="tarjeta" draggable="true" data-respuesta="ambas">
-          Crea <code>/info.txt</code> durante la construcción.
-        </div>
-      </section>
+      <div
+        class="tarjeta"
+        draggable="true"
+        data-respuesta="dos"
+      >
+        Inicia una terminal Bash.
+      </div>
 
-      <p id="resultado" class="resultado"></p>
+      <div
+        class="tarjeta"
+        draggable="true"
+        data-respuesta="uno"
+      >
+        Finaliza luego de mostrar el contenido.
+      </div>
 
-      <footer>
-        <span>FROM → BASE</span>
-        <span>RUN → EJECUTAR</span>
-        <span>CMD → INICIO</span>
-      </footer>
-    </main>
+      <div
+        class="tarjeta"
+        draggable="true"
+        data-respuesta="dos"
+      >
+        Permanece activo mientras Bash sigue ejecutándose.
+      </div>
 
-    <dialog id="preguntaFinal">
-      <button class="cerrar" id="cerrarDialog" aria-label="Cerrar">×</button>
-      <p class="kicker">PARA CERRAR</p>
-      <h2>
-        ¿Dónde creen que podrían utilizar una imagen personalizada creada por
-        ustedes?
-      </h2>
-    </dialog>
+      <div
+        class="tarjeta"
+        draggable="true"
+        data-respuesta="ambas"
+      >
+        Usa Ubuntu 24.04 como imagen base.
+      </div>
 
-    <script src="script.js"></script>
-  </body>
+      <div
+        class="tarjeta"
+        draggable="true"
+        data-respuesta="ambas"
+      >
+        Crea <code>/info.txt</code> durante la construcción.
+      </div>
+
+    </section>
+
+    <p id="resultado" class="resultado"></p>
+
+    <footer>
+      <span>FROM → BASE</span>
+      <span>RUN → EJECUTAR</span>
+      <span>CMD → INICIO</span>
+    </footer>
+
+  </main>
+
+  <dialog id="preguntaFinal">
+
+    <button
+      class="cerrar"
+      id="cerrarDialog"
+      aria-label="Cerrar"
+    >
+      ×
+    </button>
+
+    <p class="kicker">PARA CERRAR</p>
+
+    <h2>
+      ¿Dónde creen que podrían utilizar una imagen personalizada creada por ustedes?
+    </h2>
+
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
 </html>
